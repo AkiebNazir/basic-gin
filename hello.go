@@ -51,15 +51,31 @@ func GetAllPersons(ctx *gin.Context) {
 	})
 }
 
+func DeletePerson(ctx *gin.Context) {
+	uName := ctx.Param("name")
+	var p Person
+	for i, person := range persons {
+		if person.UserName == uName {
+			persons = append(persons[:i], persons[i+1:]...)
+			p = person
+		}
+	}
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Person deleted successfully",
+		"person":  p,
+	})
+}
+
 func main() {
 	fmt.Println("Welcome to go web development framwork gin")
 
 	// initialize the gin
 	r := gin.Default()
-	
+
 	r.GET("/:name", HelloWorld)
 	r.POST("/person", AddPerson)
 	r.GET("/person", GetAllPersons)
+	r.DELETE("/person/:name", DeletePerson)
 
 	r.Run(":5000")
 }
