@@ -9,7 +9,7 @@ import (
 )
 
 type Person struct {
-	UserName string `json:"user_name"`
+	ShortName string `json:"user_name"`
 	Password string `json:"password"`
 }
 
