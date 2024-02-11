@@ -8,8 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+
 type Person struct {
-	ShortName string `json:"user_name"`
+	FullName string `json:"user_name"`
 	Password string `json:"password"`
 }
 
@@ -55,7 +56,7 @@ func DeletePerson(ctx *gin.Context) {
 	uName := ctx.Param("name")
 	var p Person
 	for i, person := range persons {
-		if person.UserName == uName {
+		if person.FullName == uName {
 			persons = append(persons[:i], persons[i+1:]...)
 			p = person
 		}
